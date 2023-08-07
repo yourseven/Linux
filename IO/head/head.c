@@ -41,12 +41,10 @@ static void Head(const char * opt, const char * filename)
             rowNum--;
         }
         else write(1, buf, len);
-        
 
     }
 
     close(fd);
-
 
 }
 
