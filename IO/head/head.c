@@ -31,7 +31,7 @@ static void Head(const char * opt, const char * filename)
 
         if(p = strchr(buf, '\n'))
         {
-            lseek(fd, -(strlen(p) - 1), SEEK_CUR);
+            lseek(fd, strlen(buf) - (strlen(p) - 1) - len, SEEK_CUR);
 
             p[1] = 0;
 
@@ -40,8 +40,6 @@ static void Head(const char * opt, const char * filename)
             rowNum--;
         }
         else write(1, buf, len);
-
-        memset(buf, 0, sizeof(buf));
 
     }
 
