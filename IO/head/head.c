@@ -28,13 +28,12 @@ static void Head(const char * opt, const char * filename)
 
     while(((len = read(fd, buf, sizeof(buf))) > 0) && (rowNum > 0))
     {
+
         if(p = strchr(buf, '\n'))
         {
+            lseek(fd, -(strlen(p) - 1), SEEK_CUR);
+
             p[1] = 0;
-
-            p = p + 2;
-
-            lseek(fd, -(strlen(p) + 1), SEEK_CUR);
 
             write(1, buf, strlen(buf));
 
@@ -42,17 +41,17 @@ static void Head(const char * opt, const char * filename)
         }
         else write(1, buf, len);
 
+        memset(buf, 0, sizeof(buf));
+
     }
 
     close(fd);
 
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, const char * argv[])
 {
-    Head(argv[2], argv[1]);
+    Head(argv[1], argv[2]);
 
     return 0;
 }
-
-
